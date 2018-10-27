@@ -52,7 +52,7 @@
 .content {
     height: 1080px;
     width: 1920px;
-    background-color: #000000;
+    background-color: black;
 }
 
 /* Main Showcase */
@@ -167,7 +167,7 @@
 }
 
 .borderCurrentDay {
-    margin-top: -119px;
+    margin-top: -114px;
     margin-left: -5px;
     width: 110px;
     height: 115px;
@@ -265,8 +265,7 @@
 }
 
 
-#tablaClima {
-    margin-top: 43px;
+#tablaClima {   
     margin-left: 35px;
 }
 
@@ -293,30 +292,7 @@
  }
 
 
-#tablaClima > tr:nth-child(1) > td:nth-child(2){
 
-    font-family : "b-bold";
- }
- #tablaClima > tr:nth-child(1) > td:nth-child(3){
-
-    font-family : "b-bold";
- }
- #tablaClima > tr:nth-child(1) > td:nth-child(4){
-
-    font-family : "b-bold";
- }
- #tablaClima > tr:nth-child(1) > td:nth-child(5){
-
-    font-family : "b-bold";
- }
- #tablaClima > tr:nth-child(1) > td:nth-child(6){
-
-    font-family : "b-bold";
- }
- #tablaClima > tr:nth-child(1) > td:nth-child(7){
-
-    font-family : "b-bold";
- }
 
 .minmaxtempTitleBorder {
     top: -6px;
@@ -493,14 +469,17 @@
     position: absolute;
 }
 
-.weatherTodayLogo {
-    top: 0px;        
-    margin-left: 153px;
+.weatherTodayLogo {        
     font-family: 'b-bold-condensed';
-    font-size : 90px;
+    font-size: 90px;
     color: #FFFFFF;
-    position: absolute;
-    float: left;
+    position: relative;
+    display: inline;
+    margin-left: 15px;    
+}
+.TempMaxMin {
+    display: inline-block;
+    margin-left: 24px;
 }
 
 .weatherTodayType {
@@ -529,48 +508,41 @@
     position: absolute;
 }
 .weatherMax {
-    margin-left: 341px;
-    top: 22px;
-    float: left;
     font-family: "b-regular";
     font-size: 30px;
     color: #FFFFFF;
-    position: absolute;
 }
-.weatherMin {
-    margin-left: 341px;
-    margin-top: 52px;
-    top: 10px;
-    float: left;
+.weatherMin {           
     font-family: "b-regular";
     font-size: 30px;
     color: #FFFFFF;
-    position: absolute;
 }
 
-#pictureWeather{
-    margin-top: 30px;
-    margin-left: 35px;
-    height: 68.9987px;
-    width: 74.9812px;
+
+.pictureWeather{
+    margin-top: -69px;
+    margin-left: 25px;
+    height: 80px;
+    width: 100px;
 }
+
+
 
 .weatherMinTable {
-    margin-left:-10px;
-    top: 150px;
+    margin-left:-10px;    
     float: left;
     font: 22px museo-sans-300;
     color: #FFFFFF;
-    position: absolute;
+    position: relative;
 }
 .weatherMaxTable {
     margin-left: -10px;
-     margin-top: 40px;
-    top: 150px;
+    margin-top: 40px;
+    
     float: left;
     font: 22px museo-sans-300;
     color: #FFFFFF;
-    position: absolute;
+    position: relative;
 }
 .weatherToday2 {
     top: 47px;

@@ -77,7 +77,6 @@ function updateTime()
       var dt = new Date();
       var time = dt.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});    
        info.set('asideBlock1Content1', time);
-
 }
     function bindData(jsonData) {
         info = new BindClass('templateSix');
@@ -132,51 +131,45 @@ info.set('asideBlock1Content3', dateDay);
                  info.set('asideBlock11Content2', "↑"+ changeicon2(data.daily.data[0].icon, Math.round(data.daily.data[0].temperatureMax )) );
              info.set('asideBlock11Content3',"↓"+ changeicon2(data.daily.data[0].icon, Math.round(data.daily.data[0].temperatureMin )));
        
-              function changeiconTitle(icon, temp) {
+function changeiconTitle(icon, temp) {
     switch(icon) {
         case "clear-day":
-           info.set('asideBlock11Content1',jsonData.weather_clear);
+           return info.set('asideBlock11Content1',jsonData.weather_clear);
         case "clear-night":
-           info.set('asideBlock11Content1',jsonData.weather_clearnight);
-      case "cloudy":
-           info.set('asideBlock11Content1',jsonData.weather_cloudy);
+           return info.set('asideBlock11Content1',jsonData.weather_clearnight);
+        case "cloudy":
+           return info.set('asideBlock11Content1',jsonData.weather_cloudy);
         case "fog":
-           info.set('asideBlock11Content1',jsonData.weather_fog);
-
-      case "partly-cloudy-day":
-          info.set('asideBlock11Content1',jsonData.weather_partlycloudy);
+           return info.set('asideBlock11Content1',jsonData.weather_fog);
+        case "partly-cloudy-day":
+           return info.set('asideBlock11Content1',jsonData.weather_partlycloudy);
         case "partly-cloudy-night":
-         info.set('asideBlock11Content1',jsonData.weather_partlycloudynight);
-
-      case "rain":
-        info.set('asideBlock11Content1',jsonData.weather_rain);
-
-     case "sleet":
-           info.set('asideBlock11Content1',jsonData.weather_sleet);
-      case "snow":
-           info.set('asideBlock11Content1',jsonData.weather_snow);
-
-      case "sunny":
-           info.set('asideBlock11Content1',jsonData.weather_sunny);
-
-      default:
-           info.set('asideBlock11Content1',jsonData.weather_sunny);
+           return info.set('asideBlock11Content1',jsonData.weather_partlycloudynight);
+        case "rain":
+           return info.set('asideBlock11Content1',jsonData.weather_rain);
+        case "sleet":
+           return info.set('asideBlock11Content1',jsonData.weather_sleet);
+        case "snow":
+           return info.set('asideBlock11Content1',jsonData.weather_snow);
+        case "sunny":
+           return info.set('asideBlock11Content1',jsonData.weather_sunny);
+        case "wind":
+           return info.set('asideBlock11Content1',jsonData.weather_sleet);
     }
    } 
 
 
 
             
-             function changeicon(icon, temp) {
-            return temp+"°";
-
-            
+   function changeicon(icon, temp) {
+      return temp+"°";           
    } 
 
-        function changeicon2(icon, temp) {
-            return temp +"°C";
-     }
-             function getDayString(number) {
+   function changeicon2(icon, temp) {
+      return temp +"°C";
+   }
+   
+   function getDayString(number) {
     switch(number) {
         case 0:
             return "D";
