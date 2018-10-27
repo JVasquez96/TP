@@ -111,11 +111,6 @@ info.set('asideBlock1Content3', dateDay);
   //  info.set('asideBlock1Content3', jsonData.asideBlock1Content3);
 
  window.setInterval(updateTime,100);
-
-
-
-
-
         $.ajax({
           method: "GET",
           url: "https://api.darksky.net/forecast/7af51a01e29c8ddb7a548fad3cf35a05/-12.193731,-76.708493?units=si",

@@ -523,9 +523,11 @@
     margin-top: -69px;
     margin-left: 25px;
     height: 80px;
-    width: 100px;
+    width: 95px;
 }
-
+.Hora{
+    margin-top: -55px;    
+}
 
 
 .weatherMinTable {
