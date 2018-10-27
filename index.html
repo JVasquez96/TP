@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Dashboard App III</title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <!-- DataBinder -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome-5.1.3/css/all.min.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/helpers/util.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+
+    <script src="config.js"></script>
+    <script src="common.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css" />  
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyATP-irMofL8XLuNgtHpk8hslKiJxWwDCY",
+    authDomain: "webexample-4b71c.firebaseapp.com",
+    databaseURL: "https://webexample-4b71c.firebaseio.com",
+    projectId: "webexample-4b71c",
+    storageBucket: "",
+    messagingSenderId: "898363213780"
+  };
+  firebase.initializeApp(config);
+</script>
+
+</head>
+
+<body>
+   
+    <div class="content">
+
+        <div class="sideLeft">
+           <div class ="block-side">
+             <div class="weatherTodayLogo" id ="logoClima"></div>   
+                <img id="pictureWeather" data-bind-templateSix="asideBlock11Content1"/>       
+                <div class="weatherMax" data-bind-templateSix="asideBlock11Content2"></div>
+                <div class="weatherMin" data-bind-templateSix="asideBlock11Content3"></div>
+                <TABLE class="minmaxTable" id ="tablaClima"></TABLE>                
+                <img class="borderCurrentDay" data-bind-templateSix="borderClima"/> 
+              
+            </div>
+           <div class ="block-side"></div>
+           <div class ="block-side"></div>
+           <div class ="block-side"></div>
+        </div>  
+    
+        <div class="sideRight">
+           <div class ="block-side">
+              <div class="clock" data-bind-templateSix="asideBlock1Content1"></div>
+              <div class="clockdate" data-bind-templateSix="asideBlock1Content3"></div>
+
+           </div>
+           <div class ="block-side"></div>
+           <div class ="block-side"></div>
+           <div class ="block-side"></div>
+        </div>
+    </div>
+  
+      <!--          
+   <div id="container">
+     <h3>FirebaseUI Demo</h3>
+      <div id="loading">Loading...</div>
+      <div id="loaded" class="hidden">
+        <div id="main">
+          <div id="user-signed-in" class="hidden">
+            <div id="user-info">
+              <div id="photo-container">
+                <img id="photo">
+              </div>
+              <div id="name"></div>
+              <div id="email"></div>
+              <div id="phone"></div>
+              <div id="is-new-user"></div>
+              <div class="clearfix"></div>
+            </div>
+            <p>
+              <button id="sign-out">Sign Out</button>
+              <button id="delete-account">Delete account</button>
+            </p>
+          </div>
+          <div id="user-signed-out" class="hidden">
+            <h4>You are signed out.</h4>
+            <fieldset>
+              <legend>Configuration</legend>
+              reCAPTCHA mode for Phone Auth:
+              <label for="recaptcha-normal">
+                <input type="radio" id="recaptcha-normal" name="recaptcha" value="normal">
+                Normal
+              </label>
+              <label for="recaptcha-invisible">
+                <input type="radio" id="recaptcha-invisible" name="recaptcha" value="invisible">
+                Invisible
+              </label>
+            </fieldset>
+            <p>
+              <button id="sign-in-with-redirect">Sign In with Redirect</button>
+              <button id="sign-in-with-popup">Sign In with Popup</button>
+            </p>
+            <div id="firebaseui-spa">
+              <h5>Single Page Application mode:</h5>
+              <div id="firebaseui-container"></div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <script src="app.js"></script>-->
+
+
+<!--  
+        <p>Tus planes para hoy</p>
+
+    <button id="authorize-button" style="display: none;">Login</button>
+    <button id="signout-button" style="display: none;">Exit</button>
+    <button id="add-event-button" style="display: none;">New Event</button>
+
+    <pre class=loginDeGmail2 id="content"></pre>
+
+    <script type="text/javascript">
+   
+      var CLIENT_ID = '923179231763-6tjteg7brj71pe2jbfa0do44uaso2q3l.apps.googleusercontent.com';
+  
+      var SCOPES = "https://www.googleapis.com/auth/calendar"; 
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+      
+
+      var authorizeButton = document.getElementById('authorize-button');
+      var signoutButton = document.getElementById('signout-button');
+      var addEventButton = document.getElementById('add-event-button');
+
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      function initClient() {
+        gapi.client.init({
+          discoveryDocs: DISCOVERY_DOCS,
+          clientId: CLIENT_ID,
+          scope: SCOPES
+        }).then(function () {
+      
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+      
+          authorizeButton.onclick = handleAuthClick;
+          signoutButton.onclick = handleSignoutClick;
+      addEventButton.onclick = handleAddEventClick;
+        });
+      }
+
+      // login y logout
+      // login carga eventos
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+         // signoutButton.style.display = 'block';
+     // addEventButton.style.display = 'block';
+
+          // carga los eventos
+          listUpcomingEvents();
+        } else {
+          authorizeButton.style.display = 'block';
+          signoutButton.style.display = 'none';
+      addEventButton.style.display = 'none';
+        }
+      }
+
+      // conecta
+      function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+      }
+
+      // desconecta
+      function handleSignoutClick(event) {
+    document.getElementById("content").innerHTML = "";
+        gapi.auth2.getAuthInstance().signOut();
+      }
+
+      function crearEvento(titulo, localizacion, texto, horaInicio, horaFin, emails, callback){
+
+           var event = {
+          'summary': titulo,
+          'location': localizacion,
+          'description': texto,
+          'start': {
+            'dateTime': horaInicio
+          },
+          'end': {
+            'dateTime': horaFin
+          },
+          'attendees': emails,
+          'reminders': {
+            'useDefault': false,
+            'overrides': [
+              {'method': 'email', 'minutes': 24 * 60},
+              {'method': 'popup', 'minutes': 10}
+            ]
+          }
+        };
+
+        var request = gapi.client.calendar.events.insert({
+          'calendarId': 'primary',
+          'resource': event
+        });
+
+        request.execute(function(event) {
+          callback(event);
+        });
+
+      }
+
+      function handleAddEventClick(event){
+
+    var emails = [{'email': 'alexnewbie378@gmail.com'},
+                  {'email': 'alexnewbie378@gmail.com'}];
+
+    var fn = function(evt){
+      appendPre('Evento creado conforme el link ' + evt.htmlLink);
+    };
+
+    crearEvento("Probando nuevo evento", "Lima, Peru", "Prueba calendario", new Date(2018, 11, 11, 11, 0, 0, 0), new Date(2018, 12, 12, 12, 0, 0, 0), emails, fn); 
+    
+      }
+
+      function appendPre(message) {
+        var pre = document.getElementById('content');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
+
+      function listUpcomingEvents() {
+        gapi.client.calendar.events.list({
+          'calendarId': 'primary',
+          'timeMin': (new Date()).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'maxResults': 10,
+          'orderBy': 'startTime'
+        }).then(function(response) {
+          var events = response.result.items;
+          //appendPre('Generando lista de eventos:');
+
+          if (events.length > 0) {
+            for (i = 0; i < events.length; i++) {
+              var event = events[i];
+              var when = event.start.dateTime;
+              if (!when) {
+                when = event.start.date;
+              }
+
+              var d = new Date(when);
+                var time = d.toLocaleString();
+                
+              appendPre(event.summary + ' (' + time + ')')
+            }
+          } else {
+            appendPre('Su calendario no tiene eventos :(');
+          }
+        });
+      }
+
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+            </div>
+        </div>
+        <!-- Side Block Seperator 
+        <div class="line1 seperator"></div>
+       
+       
+        <div class="line5 seperator"></div>
+      
+       
+        <div class="line8 seperator"></div>
+
+         <div class="line1 seperator2"></div>
+        <div class="line2 seperator2"></div>
+      
+        <div class="line4 seperator2"></div>
+    
+        <div class="line6 seperator2"></div>
+       
+        <div class="line8 seperator2"></div>-->
+
+
+    
+
+</body>
+<script src="js/jquery-3.3.1.min.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/controller.js"></script>
+
+</html>
