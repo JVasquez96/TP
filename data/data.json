@@ -9,6 +9,7 @@
 
     "bannerImg": "res/images/wallpaper.png",
     "NowPlayingImage": "res/images/Music.png",
+    "NowNewsImage": "res/images/noticia.jpg",
     
     
     
@@ -38,11 +39,16 @@
     "asideBlock1Content3": "Viernes, 21 de Setiembre",
 
     "notificationtext": "Juan Gomez te etiquetó en una foto que apareces - Hace 18 minutos",
+
     "notification0text": "Michael Perez ha publicado despues de mucho tiempo - Hace 20 minutos",
     "notification1text": "Amelia Earhart te etiquetó en una foto que apareces - Hace 32 minutos",
     "notification2text": "Chris Hadfield comentó en tu estado - Hace 2 horas",
     "notification3text": "Edwin retuitió tu publicación - Ayer a las 9 PM",
     "notification4text": "Juan retwitteó la publicación de @RPPNOTICIAS - Ayer a las 11 PM",
+
+
+
+
 
     "asideBlock3Content2": "",
     "asideBlock3Content3": "",

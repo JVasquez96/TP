@@ -214,6 +214,46 @@ $("#tablaClima").html(html);
 changeiconTitle(data.currently.icon, Math.round(data.currently.temperature));
 
 var html2 = changeicon2(data.currently.icon, Math.round(data.currently.temperature));
+
+
+function levenshtein(s1, s2) {
+  var l1 = s1.length;
+  var l2 = s2.length;
+  var d = [];
+  var c = 0;
+  var a = 0;
+
+  if(l1 == 0)
+    return l2;
+
+  if(l2 == 0)
+    return l1;
+
+  var d = new Array((l1 + 1) * (l2 + 1));
+  a = l1 + 1;
+
+  for(var i = 0; i <= l1; d[i] = i++);
+  for(var j = 0; j <= l2; d[j * a] = j++);
+
+  for(var i = 1; i <= l1; i++) {
+    for(var j = 1; j <= l2; j++) {
+      if(s1[i - 1] == s2[j - 1])
+        c = 0;
+      else
+        c = 1;
+      var r = d[j * a + i - 1] + 1;
+      var s = d[(j - 1) * a + i] + 1;
+      var t = d[(j - 1) * a + i - 1] + c;
+
+      d[j * a + i] = Math.min(Math.min(r, s), t);
+    }
+  }
+
+  return(d[l2 * a + l1]);
+}
+ ///indica la cantidad de cambios de caracterees para que sean iguales  == 5
+console.log(levenshtein("Lonche con mamá","El Lonche con mi mamá"));
+
 $("#logoClima").html(html2);
 
           });
@@ -230,6 +270,7 @@ $("#logoClima").html(html2);
         info.set('showcaseContent', jsonData.showcaseContent);
         /* Image Text Overlay */
         info.set('bannerImg', jsonData.bannerImg);
+        info.set('NowNewsImage', jsonData.NowNewsImage);
        
         info.set('NowPlayingImage', jsonData.NowPlayingImage);
         info.set('bannerImgOverlayText', jsonData.bannerImgOverlayText);
