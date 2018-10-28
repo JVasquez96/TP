@@ -160,7 +160,7 @@
 }
 
 .block-side {
-    border: 1px solid yellow;
+    border: 1px solid transparent;
     height: 258px;
     width: 460px;      
 
@@ -336,44 +336,37 @@
 }
 
 .NowPlaying1 {
-     margin-left: 200px;
-    top: 21px;
-    font: 22px museo-sans-300;
-    color: #FFFFFF;
-    position: absolute;
-    float: left;
+     
+    
+    font-family: 'b-regular';
+    font-size: 15px;
+    color: #FFFFFF;   
+    
 }
 .NowPlaying2 {
-     margin-left: 200px;
-    top: 47px;
-    float: left;
-    font: 22px museo-sans-300;
+    
+    font-family : 'b-medium';
+    font-size: 18px;
     color: #FFFFFF;
-    position: absolute;
+
+    
 }
 .NowPlaying3{
-     margin-left: 200px;
-    top: 80px;
-    float: left;
-    font: 22px museo-sans-300;
+    
+    font-family: 'b-bold';
+    font-size: 30px;
     color: #FFFFFF;
-    position: absolute;
+    
 }
 .NowPlaying4 {
-     margin-left: 200px;
-    top: 113px;
-    float: left;
-    font: 22px museo-sans-300;
+     font-family: 'b-regular';
+    font-size: 18px;
     color: #FFFFFF;
-    position: absolute;
 }
-.NowPlayingButtons{
-     margin-left: 200px;
-    top: 146px;
-    float: left;
-    font: 36px museo-sans-300;
-    color: #FFFFFF;
-    position: absolute;
+.NowPlayingButtons{   
+    margin-top: 2px;         
+    font-size: 36px;
+    color: #FFFFFF;    
 }
 
 /* Pattern 2 - 3 Line */
