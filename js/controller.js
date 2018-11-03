@@ -1,4 +1,4 @@
-    /*global BindClass */
+     /*global BindClass */
 /*jslint browser: true, indent: 4*/
 
 /**
@@ -72,6 +72,80 @@ function init()
            info.set('asideBlock11Content1',jsonData.climaSunny);
     }
    } 
+
+
+
+function getCurrency(from, to, textdesign, urls)
+{
+    $.ajax({
+          method: "GET",
+         //url: "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency="+from+"&to_currency="+to+"&apikey=2AS9DR6NX2GY2SW5",
+          url: urls,
+         
+          crossDomain: true,
+          dataType: 'json',
+          async:true,
+        
+        })
+          .done(function( data ) {
+                     //  console.log( "currency: "+data.results[0].symbol)
+      
+            var results1 = data.results;
+            var full = ""
+           for (var i = 0; i < results1.length; i++) {
+//                  console.log( "currency: "+data.results[i].symbol)
+
+                  var open1 = data.results[i].open
+
+                  var close1 = data.results[i].close
+                  var result = ((Math.round(close1*100 -  open1*100))/100).toFixed(2)
+                  
+                  if(result> 0)
+                  {
+                    result =  '<p style="color: green; display:inline;">↑</p>'+ result
+                  }
+                  else if(result == 0)
+                  {
+                    result =  '<p style="color: blue; display:inline;">-</p>' + result
+                  }
+                  else if(result < 0)
+                  {
+                     result ='<p style="color: red; display:inline;">↓</p>' + Math.abs(result)
+                  }
+                 //  console.log(result)
+
+                   full = full  + " " + data.results[i].symbol + result + " "
+
+
+              }
+              $(textdesign).html('<marquee direction="left" scrolldelay="100" behavior="scroll">'+full+'</marquee>');
+              $(textdesign).html('<marquee direction="left" scrolldelay="100" behavior="scroll">'+full+'</marquee>');
+         //   info.set(textdesign, full);
+              console.log(full)
+
+           //var value = data["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+
+          //info.set(textdesign, from + " " + value);
+
+      }); 
+
+   /*  var text = '{'+
+        '"Realtime Currency Exchange Rate": {'+
+        '"1. From_Currency Code": "USD",'+
+        '"2. From_Currency Name": "United States Dollar",'+
+        '"3. To_Currency Code": "PEN",'+
+        '"4. To_Currency Name": "Peruvian Nuevo Sol",'+
+        '"5. Exchange Rate": "3.35550000",'+
+        '"6. Last Refreshed": "2018-11-02 17:56:53",'+
+        '"7. Time Zone": "UTC"'+
+        '}'+
+        '}'
+        var obj = JSON.parse(text);
+          // console.log(obj["Realtime Currency Exchange Rate"]["5. Exchange Rate"]);
+            var value = obj["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+
+            info.set(textdesign, from + " " + value);*/
+}  
 function updateTime()
 {
       var dt = new Date();
@@ -208,6 +282,9 @@ for(var i=0; i<7; ++i) {
     html += "<td>" +  changeicon(data.daily.data[i].icon, Math.round(data.daily.data[i].temperatureMin))  + "</td>"
 }
 
+
+getCurrency("USD","PEN", "#111",'https://marketdata.websol.barchart.com/getQuote.json?apikey=f40b136c6dc4451f9136bb53b9e70ffa&symbols=ZC*1,IBM,GOOGL,ADES,EEUU,ADES,ASIX,AEGN,AMTX,APD,AKS,AIN,ALB,ATI,AMRK,AMRC,AVD,AMWD,AMRS,AQMS,RKDA,AGX,ATIS,ATISW,AXTA,%5EEURUSD');
+getCurrency("EUR","PEN", "#222",'https://marketdata.websol.barchart.com/getQuote.json?apikey=f40b136c6dc4451f9136bb53b9e70ffa&symbols=ZC*1,ACH,APWC,BHP,BAK,EVGN,MT,CSTM,GOLD,TS,LYB,TX,TS,UN,UL,RIO,PKX,SHI,TANH,NEWA,GURE,%5EEURUSD');
 
 $("#tablaClima").html(html);
 
