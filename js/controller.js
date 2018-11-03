@@ -40,6 +40,53 @@ function init()
 
 }
 
+function noti()
+{
+         $.ajax({
+          method: "GET",
+          url: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Flarepublica.pe%2Frss%2Fpolitica&api_key=w2a6pnhlxyj4t43vjerkemipaopxafz6ov7hegto",
+          crossDomain: true,
+          dataType: 'jsonp',
+
+        })
+          .done(function( data ) {
+            console.log( "Data Saved:2"+data.status);
+      
+      
+        var full = "";
+       var noticias = data.items;
+         
+       
+            for (var i = 0; i < noticias.length; i++) {
+
+
+              var noti = noticias[i];
+              var title = noti.title;
+                var foto = noti.enclosure.link;
+              var desc = noti.description;
+            
+
+            if(i ==0)
+            {  
+             full = full + '<div class="carousel-item active"> <img src="'+ foto +'"style="margin-top: -43px; height: 137px;" /> <label style = "color: white; font-family: "b-medium"; font-size: 20px; margin-left: 200px; display: inline-block; margin-top:-10px;"> ' + title +' </label> <label style = "color: white; font-family: "b-light-condensed"; font-size: 15px; margin-left: 200px; display: inline-block; margin-top:-10px;">'+ desc+' </label> </div>';
+            }
+            else
+            {
+            full = full + '<div class="carousel-item"> <img src="'+ foto +'"style="margin-top: -43px; height: 137px;" />  <label style = "color: white; font-family: "b-medium"; font-size: 20px; margin-left: 200px; display: inline-block; margin-top:-10px;"> ' + title +' </label> <label style = "color: white; font-family: "b-light-condensed"; font-size: 15px; margin-left: 200px; display: inline-block; margin-top:-10px;">'+ desc+' </label> </div>';
+          
+            }
+
+
+          }
+           console.log(foto);
+           console.log(full);
+          $("#333").html('<div id="carouselExampleControls" class="carousel slide" data-ride="carousel"> <div class="carousel-inner">'+ full + '</div> <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span"> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>'
+
+
+            )
+      }); 
+
+}
  function darFormatoAldia(day,month,year) {
     var formato ="";
     switch(day) {
@@ -157,7 +204,7 @@ function updateTime()
         console.log("ssds");
 
 updateTime();
-
+noti();
 var meses = [
   "enero", "febrero", "marzo",
   "abril", "mayo", "junio", "julio",
