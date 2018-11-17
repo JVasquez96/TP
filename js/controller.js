@@ -40,11 +40,119 @@ function init()
 
 }
 
+     function countdown(fechaevento){
+   var fecha = new Date();
+   fecha = fechaevento;
+    var hoy=new Date()
+    var dias=0
+    var horas=0
+    var minutos=0
+    var segundos=0
+    
+    var date1 = new Date(fechaevento);
+  
+        var diferencia=( date1.getTime() - hoy.getTime())/1000
+        dias=Math.floor(diferencia/86400)
+        diferencia=diferencia-(86400*dias)
+        horas=Math.floor(diferencia/3600)
+        diferencia=diferencia-(3600*horas)
+        minutos=Math.floor(diferencia/60)
+        diferencia=diferencia-(60*minutos)
+        segundos=Math.floor(diferencia)
+
+      
+      console.log(hoy + "-" +fechaevento);
+      var fecha = ""
+
+
+      if(segundos> 0)
+        fecha = 'En '+ segundos + ' segundos ';
+          if(minutos> 0)
+        fecha = 'En '+ minutos + ' minutos ';
+          if(horas> 0)
+          {
+            if( date1.getHours()>12)
+            fecha = 'Hoy a las '+ date1.getHours() + ' PM ';
+          else
+             fecha = 'Hoy a las '+ date1.getHours() + ' AM ';
+          }
+        if(dias> 0)
+        fecha = 'En '+ dias + ' Dias ';
+          
+        return fecha;
+
+    
+}
+function calendariolocal()
+{  
+
+  //var listen = setInterval(function() {
+
+  fetch('http://api-mirror.azurewebsites.net/api/Values')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+        console.log(data.events);
+        console.log(data.labels);
+        for(var i=0; i<5; i++) {
+           var d = new Date(data.events[i].date);
+                var time = d.toLocaleString("en-US");
+                 var conversion = countdown(time);
+
+          var fecha = conversion;
+          var descripcion = data.events[i].desc;
+          var correo = data.labels[i].desc;
+
+          if(i==0)
+          {
+           $("#f0").html(fecha);
+           $("#c0").html(descripcion);
+            $("#e0").html(correo);
+           
+          }
+           if(i==1)
+          {
+          $("#f1").html(fecha);
+           $("#c1").html(descripcion);
+              $("#e1").html(correo);
+          }
+           if(i==2)
+          {
+          $("#f2").html(fecha);
+           $("#c2").html(descripcion);
+              $("#e2").html(correo);
+          }
+           if(i==3)
+          {
+          $("#f3").html(fecha);
+           $("#c3").html(descripcion);
+              $("#e3").html(correo);
+          }
+           if(i==4)
+          {
+          $("#f4").html(fecha);
+           $("#c4").html(descripcion);
+              $("#e4").html(correo);
+          }
+      }
+
+       
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+
+    //}, 2000); 
+}
+
+
+
 function noti()
 {
          $.ajax({
           method: "GET",
-          url: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Flarepublica.pe%2Frss%2Fpolitica&api_key=w2a6pnhlxyj4t43vjerkemipaopxafz6ov7hegto",
+          url: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Frpp.pe%2Ffeed%2Fpolitica",
           crossDomain: true,
           dataType: 'jsonp',
 
@@ -58,21 +166,24 @@ function noti()
          
        
             for (var i = 0; i < noticias.length; i++) {
-
-
+              
+                        
               var noti = noticias[i];
               var title = noti.title;
-                var foto = noti.enclosure.link;
-              var desc = noti.description;
-            
+              var foto = noti.enclosure.link;
+               var desc = noti.description;              
+
+              
+              
+         
 
             if(i ==0)
             {  
-             full = full + '<div class="carousel-item active"> <img src="'+ foto +'"style="margin-top: -43px; height: 137px;" /> <label style = "color: white; font-family: "b-medium"; font-size: 20px; margin-left: 200px; display: inline-block; margin-top:-10px;"> ' + title +' </label> <label style = "color: white; font-family: "b-light-condensed"; font-size: 15px; margin-left: 200px; display: inline-block; margin-top:-10px;">'+ desc+' </label> </div>';
+             full = full + '<div class="carousel-item active"> <img src="'+ foto +'" style="height: 230px; width:220px; float:left;" /> <label style ="color: white;display:table;font-size: 20px;margin-left: 234px;margin-top:-6px;font-family: &quot;b-medium&quot;;height: 87px; word-wrap:break-word;"> ' + title +' </label> <label style = "display:block; word-wrap:break-word; color: white; font-family: &quot;b-light-condensed&quot;; margin-left: 234px;margin-top:-7px; height: 100px;">'+ desc+' </label> </div>';
             }
             else
             {
-            full = full + '<div class="carousel-item"> <img src="'+ foto +'"style="margin-top: -43px; height: 137px;" />  <label style = "color: white; font-family: "b-medium"; font-size: 20px; margin-left: 200px; display: inline-block; margin-top:-10px;"> ' + title +' </label> <label style = "color: white; font-family: "b-light-condensed"; font-size: 15px; margin-left: 200px; display: inline-block; margin-top:-10px;">'+ desc+' </label> </div>';
+            full = full + '<div class="carousel-item"> <img src="'+ foto +'" style="height: 230px; width:220px; float:left;" /> <label style ="color: white;display:table;font-size: 20px;margin-left: 234px;margin-top:-6px;font-family: &quot;b-medium&quot;; height: 87px; word-wrap:break-word;"> ' + title +' </label> <label style = "display:block; color: white; font-family: &quot;b-light-condensed&quot;; margin-left: 234px;margin-top:-7px; height: 100px; word-wrap:break-word;">'+ desc+' </label> </div>';
           
             }
 
@@ -80,10 +191,8 @@ function noti()
           }
            console.log(foto);
            console.log(full);
-          $("#333").html('<div id="carouselExampleControls" class="carousel slide" data-ride="carousel"> <div class="carousel-inner">'+ full + '</div> <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span"> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>'
-
-
-            )
+          $("#333").html('<div id="carouselExampleControls" style="margin-left: 25px;" class="carousel slide" data-ride="carousel"> <div class="carousel-inner">'+ full + '</div> <a class="hidden carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span"> <span class="sr-only">Previous</span> </a> <a class="hidden carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>')
+          $('.carousel').carousel({  interval: 3000  });
       }); 
 
 }
@@ -168,7 +277,7 @@ function getCurrency(from, to, textdesign, urls)
               $(textdesign).html('<marquee direction="left" scrolldelay="100" behavior="scroll">'+full+'</marquee>');
               $(textdesign).html('<marquee direction="left" scrolldelay="100" behavior="scroll">'+full+'</marquee>');
          //   info.set(textdesign, full);
-              console.log(full)
+            //  console.log(full)
 
            //var value = data["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
 
@@ -199,12 +308,14 @@ function updateTime()
       var time = dt.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true});    
        info.set('asideBlock1Content1', time);
 }
+
     function bindData(jsonData) {
         info = new BindClass('templateSix');
         console.log("ssds");
 
 updateTime();
 noti();
+calendariolocal();
 var meses = [
   "enero", "febrero", "marzo",
   "abril", "mayo", "junio", "julio",
@@ -231,7 +342,11 @@ info.set('asideBlock1Content3', dateDay);
 
   //  info.set('asideBlock1Content3', jsonData.asideBlock1Content3);
 
- window.setInterval(updateTime,100);
+ window.setInterval(updateTime,60000);
+ window.setInterval(updateTime,1800000);
+window.setInterval(calendariolocal,10000);
+
+
         $.ajax({
           method: "GET",
           url: "https://api.darksky.net/forecast/7af51a01e29c8ddb7a548fad3cf35a05/-12.193731,-76.708493?units=si",
